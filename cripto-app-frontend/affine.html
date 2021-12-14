@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+
+    <title>Cripto App</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cripto App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Algorithms
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="index.html">Displacement</a></li>
+                            <li><a class="dropdown-item" href="substitution.html">Substitution</a></li>
+                            <li><a class="dropdown-item" href="permutation.html">Permutation</a></li>
+                            <li><a class="dropdown-item" href="affine.html">Affine</a></li>
+                            <li><a class="dropdown-item" href="vigenere.html">Vigenere</a></li>
+                            <li><a class="dropdown-item" href="hill.html">Hill</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="displacementAnalysis.html">Displacement Analysis</a></li>
+                            <li><a class="dropdown-item" href="substitutionAnalysis.html">Substitution Analysis</a></li>
+                            <li><a class="dropdown-item" href="vigenereAnalysis.html">Vigenere Analysis</a></li>
+                            <li><a class="dropdown-item" href="affineAnalysis.html">Affine Analysis</a></li>
+                            <li><a class="dropdown-item" href="hillAnalysis.html">Hill Analysis</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="About.html" aria-current="page">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="mt-3 text-center">Affine Algorithm</h1>
+        </div>
+        <div class="row">
+            <div class="col card container mt-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Encrypt</h3>
+                    <div class="row">
+                        <form id="myForm">
+                            <div class="mb-3">
+                                <label for="inputTextEncrypt" class="form-label">Text</label>
+                                <input type="text" class="form-control" id="inputTextEncrypt"
+                                    aria-describedby="textHelp" style="text-transform:uppercase">
+                                <div id="textHelp" class="form-text">Please introduce some text to encrypt.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputKeyEncrypt" class="form-label">Key</label>
+                                <input type="text" class="form-control" id="inputKeyEncrypt" aria-describedby="keyHelp"
+                                    style="text-transform:uppercase">
+                                <div id="keyHelp" class="form-text">Please introduce two elements of <span
+                                        class="math inline">ℤ<sub>26</sub></span> that make up your key separated by a
+                                    comma. If
+                                    you don't provide one key, the system will automatically generate one.</div>
+                            </div>
+                            <div class="text-center">
+                                <button id="submitButtonEncrypt" type="button"
+                                    class="btn btn-primary justify-content-center">Encrypt</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="encryptionResultsDiv" class="row mt-5" style="display: none;">
+                        <hr>
+                        <h4 class="card-subtitle mt-2 mb-4 text-center">Results</h4>
+                        <p><b>Encryption: </b><span id="cardEncryptionText"></span></p>
+                        <p><b>Key Used: </b><span id="cardEncryptionKey"></span></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col card container mt-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Decrypt</h3>
+                    <div class="row">
+                        <form id="myForm">
+                            <div class="mb-3">
+                                <label for="inputTextDecrypt" class="form-label">Text</label>
+                                <input type="text" class="form-control" id="inputTextDecrypt"
+                                    aria-describedby="textHelp" style="text-transform:uppercase">
+                                <div id="textHelp" class="form-text">Please introduce the text to decrypt.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputKeyDecrypt" class="form-label">Key</label>
+                                <input type="text" class="form-control" id="inputKeyDecrypt" aria-describedby="keyHelp">
+                                <div id="keyHelp" class="form-text">Please introduce the key.</div>
+                            </div>
+                            <div class="text-center">
+
+                                <button id="submitButtonDecrypt" type="button"
+                                    class="btn btn-primary justify-content-center">Decrypt</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="decryptionResultsDiv" class="row mt-5" style="display: none;">
+                        <hr>
+                        <h4 class="card-subtitle mt-2 mb-4 text-center">Results</h4>
+                        <p><b>Decryption: </b><span id="cardDecryptionText"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Explanation</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">How does this work?</h6>
+
+                    <p class="card-text">
+
+
+                    <p>En este cifrado <span class="math inline">𝒫 = 𝒞 = ℤ<sub><em>n</em></sub></span> donde <span
+                            class="math inline">𝒦 = {(<em>a</em>,<em>b</em>) ∈ ℤ<sub><em>n</em></sub>Xℤ<sub><em>n</em></sub> : (<em>a</em>,26) = 1}</span>
+                        en el caso del abecedario en inglés vamos a usar siempre <span
+                            class="math inline"><em>n</em> = 26</span>. Ahora bien, para <span
+                            class="math inline"><em>k</em>(<em>a</em>,<em>b</em>) ∈ 𝒦</span> definimos <span
+                            class="math display">
+                            <br>
+                            <br>
+                            <em>e</em><sub><em>k</em></sub>(<em>x</em>) = <em>a</em><em>x</em> + <em>b</em> mod  26 
+                            <br>
+                            <br>
+                            <em>d</em><sub><em>k</em></sub>(<em>x</em>) = <em>a</em><sup>−1</sup>(<em>y</em>−<em>b</em>) mod  26</span>
+                            <br>
+                            <br>
+                        <strong>Ejemplo:</strong> Vamos a usar este criptosistema para cifrar el texto “Texto en claro
+                        uno“ con la clave <span class="math inline"><em>k</em> = (7,2)</span> pero primero vamos a
+                        escribir la tabla de las letras a las que pertenece cada número pues es necesario tenerla
+                        presente.</p>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">b</td>
+                                    <td style="text-align: center;">c</td>
+                                    <td style="text-align: center;">d</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">f</td>
+                                    <td style="text-align: center;">g</td>
+                                    <td style="text-align: center;">h</td>
+                                    <td style="text-align: center;">i</td>
+                                    <td style="text-align: center;">j</td>
+                                    <td style="text-align: center;">k</td>
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">m</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">1</td>
+                                    <td style="text-align: center;">2</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">5</td>
+                                    <td style="text-align: center;">6</td>
+                                    <td style="text-align: center;">7</td>
+                                    <td style="text-align: center;">8</td>
+                                    <td style="text-align: center;">9</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">12</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">n</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">p</td>
+                                    <td style="text-align: center;">q</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">s</td>
+                                    <td style="text-align: center;">t</td>
+                                    <td style="text-align: center;">u</td>
+                                    <td style="text-align: center;">v</td>
+                                    <td style="text-align: center;">w</td>
+                                    <td style="text-align: center;">x</td>
+                                    <td style="text-align: center;">y</td>
+                                    <td style="text-align: center;">z</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">13</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">15</td>
+                                    <td style="text-align: center;">16</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">18</td>
+                                    <td style="text-align: center;">19</td>
+                                    <td style="text-align: center;">20</td>
+                                    <td style="text-align: center;">21</td>
+                                    <td style="text-align: center;">22</td>
+                                    <td style="text-align: center;">23</td>
+                                    <td style="text-align: center;">24</td>
+                                    <td style="text-align: center;">25</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <p>Ahora si, nuestro texto se transforma primero en:</p>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">t</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">x</td>
+                                    <td style="text-align: center;">t</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">n</td>
+                                    <td style="text-align: center;">c</td>
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">u</td>
+                                    <td style="text-align: center;">n</td>
+                                    <td style="text-align: center;">o</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">19</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">23</td>
+                                    <td style="text-align: center;">19</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">13</td>
+                                    <td style="text-align: center;">2</td>
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">20</td>
+                                    <td style="text-align: center;">13</td>
+                                    <td style="text-align: center;">14</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <p>Donde<br />
+                        <span
+                            class="math inline"><em>e</em><sub>(7,2)</sub>(<em>t</em>) = 7(19) + 2 mod  (26) = 135 mod  (26) = 5 ⇒ <em>f</em></span><br />
+                        <span
+                            class="math inline"><em>e</em><sub>(7,2)</sub>(<em>e</em>) = 7(4) + 2 mod  (26) = 30 mod  (26) = 4 ⇒ <em>e</em></span><br />
+                        <br />
+                        Y se repite el procedimiento con cada letra del texto en claro hasta obtener una lista de
+                        números correspondientes a las siguientes letras
+                    </p>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">5</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">7</td>
+                                    <td style="text-align: center;">5</td>
+                                    <td style="text-align: center;">22</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">15</td>
+                                    <td style="text-align: center;">16</td>
+                                    <td style="text-align: center;">1</td>
+                                    <td style="text-align: center;">2</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">22</td>
+                                    <td style="text-align: center;">12</td>
+                                    <td style="text-align: center;">15</td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">f</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">h</td>
+                                    <td style="text-align: center;">f</td>
+                                    <td style="text-align: center;">w</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">p</td>
+                                    <td style="text-align: center;">q</td>
+                                    <td style="text-align: center;">b</td>
+                                    <td style="text-align: center;">c</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">w</td>
+                                    <td style="text-align: center;">m</td>
+                                    <td style="text-align: center;">p</td>
+                                    <td style="text-align: center;">w</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+
+                    </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5"></div>
+
+    <footer class="bg-light text-center text-lg-start mt-auto">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="scripts/scriptAffine.js"></script>
+
+</body>
+
+</html>

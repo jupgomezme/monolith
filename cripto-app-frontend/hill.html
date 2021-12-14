@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+
+    <title>Cripto App</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <nav class="navbar navbar-expand-lg navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Cripto App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Algorithms
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="index.html">Displacement</a></li>
+                            <li><a class="dropdown-item" href="substitution.html">Substitution</a></li>
+                            <li><a class="dropdown-item" href="permutation.html">Permutation</a></li>
+                            <li><a class="dropdown-item" href="affine.html">Affine</a></li>
+                            <li><a class="dropdown-item" href="vigenere.html">Vigenere</a></li>
+                            <li><a class="dropdown-item" href="hill.html">Hill</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="displacementAnalysis.html">Displacement Analysis</a></li>
+                            <li><a class="dropdown-item" href="substitutionAnalysis.html">Substitution Analysis</a></li>
+                            <li><a class="dropdown-item" href="vigenereAnalysis.html">Vigenere Analysis</a></li>
+                            <li><a class="dropdown-item" href="affineAnalysis.html">Affine Analysis</a></li>
+                            <li><a class="dropdown-item" href="hillAnalysis.html">Hill Analysis</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="About.html" aria-current="page">About us</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <h1 class="mt-3 text-center">Hill Algorithm</h1>
+        </div>
+        <div class="row">
+            <div class="col card container mt-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Encrypt</h3>
+                    <div class="row">
+                        <form id="myForm">
+                            <div class="mb-3">
+                                <label for="inputTextEncrypt" class="form-label">Text</label>
+                                <input type="text" class="form-control" id="inputTextEncrypt"
+                                    aria-describedby="textHelp" style="text-transform:uppercase">
+                                <div id="textHelp" class="form-text">Please introduce some text to encrypt.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputKeyEncrypt" class="form-label">Key</label>
+                                <input type="text" class="form-control" id="inputKeyEncrypt" aria-describedby="keyHelp"
+                                    style="text-transform:uppercase">
+                                <div id="keyHelp" class="form-text">Please introduce text that will be transformed to a mtrix as explained below and will serve as the key. If
+                                    you don't provide one key, the system will automatically generate one.</div>
+                            </div>
+                            <div class="text-center">
+                                <button id="submitButtonEncrypt" type="button"
+                                    class="btn btn-primary justify-content-center">Encrypt</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="encryptionResultsDiv" class="row mt-5" style="display: none;">
+                        <hr>
+                        <h4 class="card-subtitle mt-2 mb-4 text-center">Results</h4>
+                        <p><b>Encryption: </b><span id="cardEncryptionText"></span></p>
+                        <p><b>Key Used: </b><span id="cardEncryptionKey"></span></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col card container mt-3">
+                <div class="card-body">
+                    <h3 class="card-title text-center mb-4">Decrypt</h3>
+                    <div class="row">
+                        <form id="myForm">
+                            <div class="mb-3">
+                                <label for="inputTextDecrypt" class="form-label">Text</label>
+                                <input type="text" class="form-control" id="inputTextDecrypt"
+                                    aria-describedby="textHelp" style="text-transform:uppercase">
+                                <div id="textHelp" class="form-text">Please introduce the text to decrypt.</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inputKeyDecrypt" class="form-label">Key</label>
+                                <input type="text" class="form-control" id="inputKeyDecrypt" aria-describedby="keyHelp">
+                                <div id="keyHelp" class="form-text">Please introduce the key.</div>
+                            </div>
+                            <div class="text-center">
+
+                                <button id="submitButtonDecrypt" type="button"
+                                    class="btn btn-primary justify-content-center">Decrypt</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="decryptionResultsDiv" class="row mt-5" style="display: none;">
+                        <hr>
+                        <h4 class="card-subtitle mt-2 mb-4 text-center">Results</h4>
+                        <p><b>Decryption: </b><span id="cardDecryptionText"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Explanation</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">How does this work?</h6>
+
+                    <p class="card-text">
+
+
+
+                    <p>Para un <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20m" alt="m" title="m"
+                            class="math inline" /> fijo en este criptosistema <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BP%7D%3D%5Cmathcal%7BC%7D%3D%5Cmathbb%7BZ%7D_%7B26%7D%5Em"
+                            alt="\mathcal{P}=\mathcal{C}=\mathbb{Z}_{26}^m"
+                            title="\mathcal{P}=\mathcal{C}=\mathbb{Z}_{26}^m" class="math inline" /> y <img
+                            style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathcal%7BK%7D%3A%3D%5C%7BA%5Cin%20M_m%28%5Cmathbb%7BZ%7D_%7B26%7D%3A%28%7CA%7C%2C26%29%3D1"
+                            alt="\mathcal{K}:=\{A\in M_m(\mathbb{Z}_{26}:(|A|,26)=1"
+                            title="\mathcal{K}:=\{A\in M_m(\mathbb{Z}_{26}:(|A|,26)=1" class="math inline" /> donde <img
+                            style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20A%5Cin%20M_m%28%5Cmathbb%7BZ%7D_%7B26%7D"
+                            alt="A\in M_m(\mathbb{Z}_{26}" title="A\in M_m(\mathbb{Z}_{26}" class="math inline" /> es
+                        una matriz cuadrada de longitud <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20m" alt="m" title="m"
+                            class="math inline" /> con sus elementos en <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cmathbb%7BZ%7D_%7B26%7D"
+                            alt="\mathbb{Z}_{26}" title="\mathbb{Z}_{26}" class="math inline" /> y <img
+                            style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%7CA%7C" alt="|A|" title="|A|"
+                            class="math inline" /> es el determinante de la matriz <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20A" alt="A" title="A"
+                            class="math inline" />. Así, para una matriz <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20K%5Cin%5Cmathcal%7BK%7D"
+                            alt="K\in\mathcal{K}" title="K\in\mathcal{K}" class="math inline" /> fija se tiene que 
+                            <br>
+                            <br>
+                            <img
+                            style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Cdisplaystyle%20e_k%28x%29%3Dxk%5Chspace%7B4cm%7D%20d_k%28y%29%3Dyk%5E%7B-1%7D"
+                            alt="e_k(x)=xk\hspace{4cm} d_k(y)=yk^{-1}" title="e_k(x)=xk\hspace{4cm} d_k(y)=yk^{-1}"
+                            class="math display" />
+                            <br>
+                            <br>
+                            <strong>Ejemplo:</strong> Vamos a cifrar una célebre frase de Albert
+                        Einstein “La luz es la sombra de Dios<img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%22" alt="&quot;" title="&quot;"
+                            class="math inline" /> con la clave <img style="vertical-align:middle"
+                            src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20k%3D%5Cbegin%7Bbmatrix%7D%0A%20%20%20%201%20%26%202%5C%5C%0A%20%20%20%202%20%26%203%0A%20%20%20%20%5Cend%7Bbmatrix%7D"
+                            alt="k=\begin{bmatrix}
+    1 &amp; 2\\
+    2 &amp; 3
+    \end{bmatrix}" title="k=\begin{bmatrix}
+    1 &amp; 2\\
+    2 &amp; 3
+    \end{bmatrix}" class="math inline" /> primero debemos organizar los datos del texto en claro.</p>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">u</td>
+                                    <td style="text-align: center;">z</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">s</td>
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">s</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">m</td>
+                                    <td style="text-align: center;">b</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">d</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">d</td>
+                                    <td style="text-align: center;">i</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">s</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">20</td>
+                                    <td style="text-align: center;">25</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">18</td>
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">18</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">12</td>
+                                    <td style="text-align: center;">1</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;">8</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">18</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <div class="multicols">
+                        <ul>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B11%5Chspace%7B2mm%7D0%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B11%5Chspace%7B2mm%7D22%5Cright%5D"
+                                        alt="\left[11\hspace{2mm}0\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[11\hspace{2mm}22\right]"
+                                        title="\left[11\hspace{2mm}0\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[11\hspace{2mm}22\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B11%5Chspace%7B2mm%7D20%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B25%5Chspace%7B2mm%7D4%5Cright%5D"
+                                        alt="\left[11\hspace{2mm}20\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[25\hspace{2mm}4\right]"
+                                        title="\left[11\hspace{2mm}20\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[25\hspace{2mm}4\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B25%5Chspace%7B2mm%7D4%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B7%5Chspace%7B2mm%7D10%5Cright%5D"
+                                        alt="\left[25\hspace{2mm}4\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[7\hspace{2mm}10\right]"
+                                        title="\left[25\hspace{2mm}4\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[7\hspace{2mm}10\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B18%5Chspace%7B2mm%7D11%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B14%5Chspace%7B2mm%7D17%5Cright%5D"
+                                        alt="\left[18\hspace{2mm}11\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[14\hspace{2mm}17\right]"
+                                        title="\left[18\hspace{2mm}11\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[14\hspace{2mm}17\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B0%5Chspace%7B2mm%7D18%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B10%5Chspace%7B2mm%7D0%5Cright%5D"
+                                        alt="\left[0\hspace{2mm}18\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}0\right]"
+                                        title="\left[0\hspace{2mm}18\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}0\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B14%5Chspace%7B2mm%7D12%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B12%5Chspace%7B2mm%7D0%5Cright%5D"
+                                        alt="\left[14\hspace{2mm}12\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[12\hspace{2mm}0\right]"
+                                        title="\left[14\hspace{2mm}12\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[12\hspace{2mm}0\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B1%5Chspace%7B2mm%7D17%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B9%5Chspace%7B2mm%7D1%5Cright%5D"
+                                        alt="\left[1\hspace{2mm}17\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[9\hspace{2mm}1\right]"
+                                        title="\left[1\hspace{2mm}17\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[9\hspace{2mm}1\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B3%5Chspace%7B2mm%7D0%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B6%5Chspace%7B2mm%7D9%5Cright%5D"
+                                        alt="\left[3\hspace{2mm}0\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[6\hspace{2mm}9\right]"
+                                        title="\left[3\hspace{2mm}0\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[6\hspace{2mm}9\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B4%5Chspace%7B2mm%7D3%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B10%5Chspace%7B2mm%7D17%5Cright%5D"
+                                        alt="\left[4\hspace{2mm}3\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}17\right]"
+                                        title="\left[4\hspace{2mm}3\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}17\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B8%5Chspace%7B2mm%7D14%5Cright%5D%5Cbegin%7Bbmatrix%7D1%20%26%202%20%5C%5C%202%20%26%203%20%5Cend%7Bbmatrix%7D%3D%5Cleft%5B10%5Chspace%7B2mm%7D6%5Cright%5D"
+                                        alt="\left[8\hspace{2mm}14\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}6\right]"
+                                        title="\left[8\hspace{2mm}14\right]\begin{bmatrix}1 &amp; 2 \\ 2 &amp; 3 \end{bmatrix}=\left[10\hspace{2mm}6\right]"
+                                        class="math inline" /></p>
+                            </li>
+                            <li>
+                                <p><img style="vertical-align:middle"
+                                        src="https://latex.codecogs.com/png.latex?%5Ctextstyle%20%5Cleft%5B18%5Cright%5D%3D%5Cleft%5B18%5Cright%5D"
+                                        alt="\left[18\right]=\left[18\right]" title="\left[18\right]=\left[18\right]"
+                                        class="math inline" /></p>
+                            </li>
+                        </ul>
+                    </div>
+                    <p>Por lo que el texto encriptado nos queda</p>
+                    <div class="center">
+                        <table>
+                            <tbody>
+                                <tr class="odd">
+                                    <td style="text-align: center;">11</td>
+                                    <td style="text-align: center;">22</td>
+                                    <td style="text-align: center;">25</td>
+                                    <td style="text-align: center;">4</td>
+                                    <td style="text-align: center;">7</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">14</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">12</td>
+                                    <td style="text-align: center;">0</td>
+                                    <td style="text-align: center;">9</td>
+                                    <td style="text-align: center;">1</td>
+                                    <td style="text-align: center;">6</td>
+                                    <td style="text-align: center;">9</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">17</td>
+                                    <td style="text-align: center;">10</td>
+                                    <td style="text-align: center;">6</td>
+                                    <td style="text-align: center;">18</td>
+                                </tr>
+                                <tr class="even">
+                                    <td style="text-align: center;">l</td>
+                                    <td style="text-align: center;">w</td>
+                                    <td style="text-align: center;">z</td>
+                                    <td style="text-align: center;">e</td>
+                                    <td style="text-align: center;">h</td>
+                                    <td style="text-align: center;">k</td>
+                                    <td style="text-align: center;">o</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">k</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">m</td>
+                                    <td style="text-align: center;">a</td>
+                                    <td style="text-align: center;">j</td>
+                                    <td style="text-align: center;">b</td>
+                                    <td style="text-align: center;">g</td>
+                                    <td style="text-align: center;">j</td>
+                                    <td style="text-align: center;">k</td>
+                                    <td style="text-align: center;">r</td>
+                                    <td style="text-align: center;">k</td>
+                                    <td style="text-align: center;">g</td>
+                                    <td style="text-align: center;">s</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+
+                    </p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5"></div>
+
+    <footer class="bg-light text-center text-lg-start mt-auto">
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright
+        </div>
+        <!-- Copyright -->
+    </footer>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="scripts/scriptHill.js"></script>
+
+</body>
+
+</html>

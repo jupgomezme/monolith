@@ -1,0 +1,37 @@
+Para un $m$ fijo en este criptosistema $\mathcal{P}=\mathcal{C}=\mathbb{Z}_{26}^m$ y $\mathcal{K}:=\{A\in M_m(\mathbb{Z}_{26}:(|A|,26)=1$ donde $A\in M_m(\mathbb{Z}_{26}$ es una matriz cuadrada de longitud $m$ con sus elementos en $\mathbb{Z}_{26}$ y $|A|$ es el determinante de la matriz $A$. Así, para una matriz $K\in\mathcal{K}$ fija se tiene que
+\begin{equation*}
+    e_k(x)=xk\hspace{4cm} d_k(y)=yk^{-1}
+\end{equation*}
+\textbf{Ejemplo: }Vamos a cifrar una célebre frase de Albert Einstein ``La luz es la sombra de Dios$"$ con la clave $k=\begin{bmatrix}
+    1 & 2\\
+    2 & 3
+    \end{bmatrix}$ primero debemos organizar los datos del texto en claro.
+\begin{center}
+\begin{tabular}{c c c c c c c c c c c c c c c c c c c c c }
+    l & a & l & u & z & e & s & l & a & s & o & m & b & r & a & d & e & d & i & o & s\\
+    11 & 0 & 11 & 20 & 25 & 4 & 18 & 11 & 0 & 18 & 14 & 12 & 1 & 17 & 0 & 3 & 4 & 3 & 8 & 14 & 18
+\end{tabular}
+\end{center}
+\vspace{5mm}
+\begin{multicols}{2}
+\begin{itemize}
+    \item $\left[11\hspace{2mm}0\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[11\hspace{2mm}22\right]$
+    \item $\left[11\hspace{2mm}20\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[25\hspace{2mm}4\right]$
+    \item $\left[25\hspace{2mm}4\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[7\hspace{2mm}10\right]$
+    \item $\left[18\hspace{2mm}11\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[14\hspace{2mm}17\right]$
+    \item $\left[0\hspace{2mm}18\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[10\hspace{2mm}0\right]$
+    \item $\left[14\hspace{2mm}12\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[12\hspace{2mm}0\right]$
+    \item $\left[1\hspace{2mm}17\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[9\hspace{2mm}1\right]$
+    \item $\left[3\hspace{2mm}0\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[6\hspace{2mm}9\right]$
+    \item $\left[4\hspace{2mm}3\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[10\hspace{2mm}17\right]$
+    \item $\left[8\hspace{2mm}14\right]\begin{bmatrix}1 & 2 \\ 2 & 3 \end{bmatrix}=\left[10\hspace{2mm}6\right]$
+    \item $\left[18\right]=\left[18\right]$
+\end{itemize}
+\end{multicols}
+Por lo que el texto encriptado nos queda
+\begin{center}
+\begin{tabular}{c c c c c c c c c c c c c c c c c c c c c }
+    11 & 22 & 25 & 4 & 7 & 10 & 14 & 17 & 10 & 0 & 12 & 0 & 9 & 1 & 6 & 9 & 10 & 17 & 10 & 6 & 18\\
+    l & w & z & e & h & k & o & r & k & a & m & a & j & b & g & j & k & r & k & g & s
+\end{tabular}
+\end{center}
